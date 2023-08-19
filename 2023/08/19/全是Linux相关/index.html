@@ -1,0 +1,196 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>全是linux相关 | hry</title><meta name="author" content="Riyu Huang"><meta name="copyright" content="Riyu Huang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="全是Linux相关使用Core dump（gdb） #SET(CMAKE_BUILD_TYPE “Debug”)#SET(CMAKE_CXX_FLAGS_DEBUG “$ENV{CXXFLAGS} -O0 -Wall -g2 -ggdb”)#SET(CMAKE_CXX_FLAGS_RELEASE “$ENV{CXXFLAGS} -O3 -Wall”)  在linux终端执行以下命令 ulimit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="全是linux相关">
+<meta property="og:url" content="https://www.huangriyu.cn/2023/08/19/%E5%85%A8%E6%98%AFlinux%E7%9B%B8%E5%85%B3/index.html">
+<meta property="og:site_name" content="hry">
+<meta property="og:description" content="全是Linux相关使用Core dump（gdb） #SET(CMAKE_BUILD_TYPE “Debug”)#SET(CMAKE_CXX_FLAGS_DEBUG “$ENV{CXXFLAGS} -O0 -Wall -g2 -ggdb”)#SET(CMAKE_CXX_FLAGS_RELEASE “$ENV{CXXFLAGS} -O3 -Wall”)  在linux终端执行以下命令 ulimit">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.huangriyu.cn/images/wutiao.png">
+<meta property="article:published_time" content="2023-08-19T15:05:41.000Z">
+<meta property="article:modified_time" content="2023-08-19T15:05:59.626Z">
+<meta property="article:author" content="Riyu Huang">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.huangriyu.cn/images/wutiao.png"><link rel="shortcut icon" href="/images/%E4%BC%9A%E5%91%98%E7%AD%89%E7%BA%A7.png"><link rel="canonical" href="https://www.huangriyu.cn/2023/08/19/%E5%85%A8%E6%98%AFlinux%E7%9B%B8%E5%85%B3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '全是linux相关',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-08-19 23:05:59'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/images/wutiao.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 目录</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/recommend/"><i class="fa-fw fas fa-tools"></i><span> 推荐工具</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="hry"><span class="site-name">hry</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 目录</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/recommend/"><i class="fa-fw fas fa-tools"></i><span> 推荐工具</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">全是linux相关</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-08-19T15:05:41.000Z" title="发表于 2023-08-19 23:05:41">2023-08-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-19T15:05:59.626Z" title="更新于 2023-08-19 23:05:59">2023-08-19</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="全是linux相关"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="全是Linux相关"><a href="#全是Linux相关" class="headerlink" title="全是Linux相关"></a>全是Linux相关</h1><h2 id="使用Core-dump（gdb）"><a href="#使用Core-dump（gdb）" class="headerlink" title="使用Core dump（gdb）"></a>使用Core dump（gdb）</h2><ol>
+<li><p>#SET(CMAKE_BUILD_TYPE “Debug”)<br>#SET(CMAKE_CXX_FLAGS_DEBUG “$ENV{CXXFLAGS} -O0 -Wall -g2 -ggdb”)<br>#SET(CMAKE_CXX_FLAGS_RELEASE “$ENV{CXXFLAGS} -O3 -Wall”)</p>
+</li>
+<li><p>在linux终端执行以下命令 ulimit -c unlimited </p>
+</li>
+<li><p>运行sysctl -w kernel.core_pattern&#x3D;&#x2F;tmp&#x2F;core-%e.%p.%h.%t</p>
+<p>一个是放开core文件大小的限制，我们平时跑代码没有生成core文件是因为linux系统自动限制core文件大小为0kb。<br>二是指定core文件生成的位置在&#x2F;tmp下面，名称是core-标识进程的参数值，你要可以设置其他，不重要。</p>
+<p>代码运行，core dump之后就会生成core 文件。</p>
+<ol start="4">
+<li>在终端运行 gdb -c core文件<br>大概率你会出现 ？？我们需要加载符号符号表。<br>在gdb 里面 输入命令</li>
+</ol>
+<p>symbol-file 应用的执行程序（绝对路径）<br>sharedlibrary</p>
+<p>注意是在gdb里面输入的，这样就会从二进制程序文件及其引入的共享库中加载符号，再输入bt ，这样就OK了。一下子就定位到哪行代码出了问题。<br>非常方便！</p>
+</li>
+</ol>
+<h2 id="想要windows下写的shell脚本在linux下运行？"><a href="#想要windows下写的shell脚本在linux下运行？" class="headerlink" title="想要windows下写的shell脚本在linux下运行？"></a>想要windows下写的shell脚本在linux下运行？</h2><ol>
+<li><p>notepad++ 另存为Unix</p>
+</li>
+<li><p>运行sed -i ‘s&#x2F;\r$&#x2F;&#x2F;‘ .&#x2F;pack.sh</p>
+</li>
+</ol>
+<h2 id="ubuntu将一个文件夹下的所有内容复制到另一个文件夹下"><a href="#ubuntu将一个文件夹下的所有内容复制到另一个文件夹下" class="headerlink" title="ubuntu将一个文件夹下的所有内容复制到另一个文件夹下"></a>ubuntu将一个文件夹下的所有内容复制到另一个文件夹下</h2><p>cp -r &#x2F;home&#x2F;user&#x2F;* &#x2F;home&#x2F;user&#x2F;package&#x2F;</p>
+<h2 id="关于目录"><a href="#关于目录" class="headerlink" title="关于目录"></a>关于目录</h2><p>&#x2F; 代表根目录<br>. 当前目录<br>.. 进入当前目录的上一级目录<br>不加任何参数，直接使用cd，则返回到用户的家目录</p>
+<h2 id="将用户添加为-sudo"><a href="#将用户添加为-sudo" class="headerlink" title="将用户添加为 sudo"></a>将用户添加为 sudo</h2><ol>
+<li>创建新用户：sudo adduser hry</li>
+<li>将用户添加到 sudo 组：sudo usermod -a -G sudo hry || sudo adduser hry sudo</li>
+<li>安装 sudo 命令：apt-get install sudo</li>
+</ol>
+<h2 id="linux查找文件"><a href="#linux查找文件" class="headerlink" title="linux查找文件"></a>linux查找文件</h2><p>find &#x2F; -name bvclient</p>
+<h2 id="调整声音"><a href="#调整声音" class="headerlink" title="调整声音"></a>调整声音</h2><p>amixer scontrols &#x2F;&#x2F;打开各种控制</p>
+<p>amixer set ‘headphone volume’ 100% &#x2F;&#x2F;将机器扬声器设置为最大声音</p>
+<h2 id="linux删除该目录下指定后缀名的文件"><a href="#linux删除该目录下指定后缀名的文件" class="headerlink" title="linux删除该目录下指定后缀名的文件"></a>linux删除该目录下指定后缀名的文件</h2><p>find &#x2F;usr&#x2F; -type f -name “*.wav” | xargs rm</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.huangriyu.cn">Riyu Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.huangriyu.cn/2023/08/19/%E5%85%A8%E6%98%AFlinux%E7%9B%B8%E5%85%B3/">https://www.huangriyu.cn/2023/08/19/%E5%85%A8%E6%98%AFlinux%E7%9B%B8%E5%85%B3/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.huangriyu.cn" target="_blank">hry</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/linux/">linux</a></div><div class="post_share"><div class="social-share" data-image="/images/wutiao.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/08/19/%E4%B8%80%E4%BA%9Bc-%E5%85%AB%E8%82%A1%EF%BC%88%E5%85%B6%E5%AE%9E%E6%98%AF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%EF%BC%89/" title="一些c++八股（其实是基础知识）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">一些c++八股（其实是基础知识）</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/images/wutiao.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Riyu Huang</div><div class="author-info__description">“enjoy the moment”</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/H-RY"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:849541922@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=416394356&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="/images/111.png" target="_blank" title="WeChat"><i class="fab fa-weixin"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">“永远在提升自己的路上”</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%A8%E6%98%AFLinux%E7%9B%B8%E5%85%B3"><span class="toc-number">1.</span> <span class="toc-text">全是Linux相关</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Core-dump%EF%BC%88gdb%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">使用Core dump（gdb）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%83%B3%E8%A6%81windows%E4%B8%8B%E5%86%99%E7%9A%84shell%E8%84%9A%E6%9C%AC%E5%9C%A8linux%E4%B8%8B%E8%BF%90%E8%A1%8C%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">想要windows下写的shell脚本在linux下运行？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ubuntu%E5%B0%86%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E7%9A%84%E6%89%80%E6%9C%89%E5%86%85%E5%AE%B9%E5%A4%8D%E5%88%B6%E5%88%B0%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">ubuntu将一个文件夹下的所有内容复制到另一个文件夹下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E7%9B%AE%E5%BD%95"><span class="toc-number">1.4.</span> <span class="toc-text">关于目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%86%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E4%B8%BA-sudo"><span class="toc-number">1.5.</span> <span class="toc-text">将用户添加为 sudo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6"><span class="toc-number">1.6.</span> <span class="toc-text">linux查找文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E6%95%B4%E5%A3%B0%E9%9F%B3"><span class="toc-number">1.7.</span> <span class="toc-text">调整声音</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux%E5%88%A0%E9%99%A4%E8%AF%A5%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E5%90%8D%E7%9A%84%E6%96%87%E4%BB%B6"><span class="toc-number">1.8.</span> <span class="toc-text">linux删除该目录下指定后缀名的文件</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/08/19/%E5%85%A8%E6%98%AFlinux%E7%9B%B8%E5%85%B3/" title="全是linux相关">全是linux相关</a><time datetime="2023-08-19T15:05:41.000Z" title="发表于 2023-08-19 23:05:41">2023-08-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/08/19/%E4%B8%80%E4%BA%9Bc-%E5%85%AB%E8%82%A1%EF%BC%88%E5%85%B6%E5%AE%9E%E6%98%AF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%EF%BC%89/" title="一些c++八股（其实是基础知识）">一些c++八股（其实是基础知识）</a><time datetime="2023-08-19T15:04:50.000Z" title="发表于 2023-08-19 23:04:50">2023-08-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/08/19/%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F%E7%9A%84%E9%97%AE%E9%A2%98/" title="乱七八糟的问题">乱七八糟的问题</a><time datetime="2023-08-19T15:04:02.000Z" title="发表于 2023-08-19 23:04:02">2023-08-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/08/19/git-%E5%91%BD%E4%BB%A4/" title="git 命令">git 命令</a><time datetime="2023-08-19T15:02:47.000Z" title="发表于 2023-08-19 23:02:47">2023-08-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/08/18/C++%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AC%AC3%E7%89%88/" title="C++程序设计第3版.pdf">C++程序设计第3版.pdf</a><time datetime="2023-08-18T06:52:24.000Z" title="发表于 2023-08-18 14:52:24">2023-08-18</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Riyu Huang</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
