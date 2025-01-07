@@ -13,7 +13,7 @@
   
   <title>
     
-      archive_a: 2025 
+      如何导入一个IMU模块 
       
       
       |
@@ -104,158 +104,164 @@
 
 
       <div class="flex-container">
-        <!-- 归档页，展示本站所有文章，按照年份降序归类，url形式：https://yoursite/archives/ -->
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
 
-<!-- last: 按年份把文章分组，当前遍历到的年份 -->
-<!-- now: 当前遍历到的文章的发布年份 -->
 
-<div class="container archives">
-  <div class="post-list">
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2025</span>
-          </h2>
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">如何导入一个IMU模块</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2025-01-07 15:13:36
+        </span>
+        
+      </div>
+      <div class="markdown-body">
+        <h2 id="如何导入一个IMU模块"><a href="#如何导入一个IMU模块" class="headerlink" title="如何导入一个IMU模块"></a>如何导入一个IMU模块</h2><h3 id="导入驱动"><a href="#导入驱动" class="headerlink" title="导入驱动"></a>导入驱动</h3><ol>
+<li>将驱动源码放入对应路径</li>
+<li>更改Kconfig（对应menuconfig选项）</li>
+<li>更改Makefile文件，增加源码编译</li>
+<li>make kernel_menuconfig 选上对应选项</li>
+</ol>
+<h3 id="配置该模块使用的接口"><a href="#配置该模块使用的接口" class="headerlink" title="配置该模块使用的接口"></a>配置该模块使用的接口</h3><p>如：此处IMU配置SPI（IMU的文档规定）</p>
+<ol>
+<li>设备树配置SPI节点（对应原理图）（cdts）（sunxi为linux通用）<ol>
+<li>status需要改为okey（不需要改为disabled）</li>
+<li>sys.config.fex优先级高于设备树，所以想设备树生效需注释对应sys.config.fex</li>
+</ol>
+</li>
+<li>配置pin脚（muxsel为function，看的时datasheet）（pull中拉低是0，拉高是1），此处片选需要拉高（SPI有四个配置项，CS片选，CLK时钟，MISO和MOSI）</li>
+<li>设备树中添加IMU配置节点</li>
+</ol>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2025/01/07/%E5%B5%8C%E5%85%A5%E5%BC%8F%E4%B8%93%E4%B8%9A%E5%90%8D%E8%AF%8D/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2025-01-07 15:13:36
+            </span>
+            
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2025/01/07/C++%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
         </div>
       
-      <div class="post-item" title="protobuf的解释和拓展">
-        <div class="time-m-d">01-07</div>
-        <div class="title">
-          <a href="/2025/01/07/protobuf%E7%9A%84%E8%A7%A3%E9%87%8A%E5%92%8C%E6%8B%93%E5%B1%95/">
-            <span>protobuf的解释和拓展</span>
-          </a>
-        </div>
-      </div>
+    </div>
     
-      <div class="post-item" title="mqtt详解">
-        <div class="time-m-d">01-07</div>
-        <div class="title">
-          <a href="/2025/01/07/mqtt%E8%AF%A6%E8%A7%A3/">
-            <span>mqtt详解</span>
-          </a>
-        </div>
-      </div>
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AF%BC%E5%85%A5%E4%B8%80%E4%B8%AAIMU%E6%A8%A1%E5%9D%97"><span class="toc-text">如何导入一个IMU模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5%E9%A9%B1%E5%8A%A8"><span class="toc-text">导入驱动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E8%AF%A5%E6%A8%A1%E5%9D%97%E4%BD%BF%E7%94%A8%E7%9A%84%E6%8E%A5%E5%8F%A3"><span class="toc-text">配置该模块使用的接口</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
     
-      <div class="post-item" title="如何将menuconfig没有的命令加入系统">
-        <div class="time-m-d">01-07</div>
-        <div class="title">
-          <a href="/2025/01/07/%E5%A6%82%E4%BD%95%E5%B0%86menuconfig%E6%B2%A1%E6%9C%89%E7%9A%84%E5%91%BD%E4%BB%A4%E5%8A%A0%E5%85%A5%E7%B3%BB%E7%BB%9F/">
-            <span>如何将menuconfig没有的命令加入系统</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="如何控制一个GPIO">
-        <div class="time-m-d">01-07</div>
-        <div class="title">
-          <a href="/2025/01/07/%E5%A6%82%E4%BD%95%E6%8E%A7%E5%88%B6%E4%B8%80%E4%B8%AAGPIO/">
-            <span>如何控制一个GPIO</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="Linux的使用技巧">
-        <div class="time-m-d">01-07</div>
-        <div class="title">
-          <a href="/2025/01/07/Linux%E7%9A%84%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">
-            <span>Linux的使用技巧</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="C++中的基本概念">
-        <div class="time-m-d">01-07</div>
-        <div class="title">
-          <a href="/2025/01/07/C++%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">
-            <span>C++中的基本概念</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="如何导入一个IMU模块">
-        <div class="time-m-d">01-07</div>
-        <div class="title">
-          <a href="/2025/01/07/%E5%A6%82%E4%BD%95%E5%AF%BC%E5%85%A5%E4%B8%80%E4%B8%AAIMU%E6%A8%A1%E5%9D%97/">
-            <span>如何导入一个IMU模块</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="嵌入式专业名词">
-        <div class="time-m-d">01-07</div>
-        <div class="title">
-          <a href="/2025/01/07/%E5%B5%8C%E5%85%A5%E5%BC%8F%E4%B8%93%E4%B8%9A%E5%90%8D%E8%AF%8D/">
-            <span>嵌入式专业名词</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="如何用示波器查询电流的问题">
-        <div class="time-m-d">01-07</div>
-        <div class="title">
-          <a href="/2025/01/07/%E5%A6%82%E4%BD%95%E7%94%A8%E7%A4%BA%E6%B3%A2%E5%99%A8%E6%9F%A5%E8%AF%A2%E7%94%B5%E6%B5%81%E7%9A%84%E9%97%AE%E9%A2%98/">
-            <span>如何用示波器查询电流的问题</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="市场和产品的感悟">
-        <div class="time-m-d">01-07</div>
-        <div class="title">
-          <a href="/2025/01/07/%E5%B8%82%E5%9C%BA%E5%92%8C%E4%BA%A7%E5%93%81%E7%9A%84%E6%84%9F%E6%82%9F/">
-            <span>市场和产品的感悟</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="扫地机器人行业分析">
-        <div class="time-m-d">01-07</div>
-        <div class="title">
-          <a href="/2025/01/07/%E6%89%AB%E5%9C%B0%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%A1%8C%E4%B8%9A%E5%88%86%E6%9E%90/">
-            <span>扫地机器人行业分析</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="第一性原理汇总">
-        <div class="time-m-d">01-07</div>
-        <div class="title">
-          <a href="/2025/01/07/%E7%AC%AC%E4%B8%80%E6%80%A7%E5%8E%9F%E7%90%86%E6%B1%87%E6%80%BB/">
-            <span>第一性原理汇总</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="secret">
-        <div class="time-m-d">01-07</div>
-        <div class="title">
-          <a href="/2025/01/07/secret/">
-            <span>secret</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="Linux下的目录结构">
-        <div class="time-m-d">01-06</div>
-        <div class="title">
-          <a href="/2025/01/06/Linux%E4%B8%8B%E7%9A%84%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/">
-            <span>Linux下的目录结构</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="hello world">
-        <div class="time-m-d">01-06</div>
-        <div class="title">
-          <a href="/2025/01/06/hello_world/">
-            <span>hello world</span>
-          </a>
-        </div>
+      <div class="comments-container">
+        
+
+
+
+
+  
+    <script async type="text/javascript" src="/plugins/valine.min.js" onload="loadValineSuc(this)"></script>
+  
+
+  <div id="vcomments"></div>
+
+  <script>
+    function loadValineSuc() {
+      new Valine({
+        el: '#vcomments',
+        appId: 'nyRspGwGgVM9RJD3ZeUAMIaD-gzGzoHsz',
+        appKey: 'H9K1pHBag6iqt2dBMWcnxXQ0',
+        placeholder: 'Welcome!',
+        avatar: 'retro',
+        lang: 'en'
+      })
+    }
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
+
+
       </div>
     
   </div>
-</div>
+
 
         
 <div class="footer">
@@ -512,6 +518,24 @@
 
 
         
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E5%A6%82%E4%BD%95%E5%AF%BC%E5%85%A5%E4%B8%80%E4%B8%AAIMU%E6%A8%A1%E5%9D%97 + '&url=' + http%3A%2F%2Fexample.com%2F2025%2F01%2F07%2F%25E5%25A6%2582%25E4%25BD%2595%25E5%25AF%25BC%25E5%2585%25A5%25E4%25B8%2580%25E4%25B8%25AAIMU%25E6%25A8%25A1%25E5%259D%2597%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2025/01/07/%E5%A6%82%E4%BD%95%E5%AF%BC%E5%85%A5%E4%B8%80%E4%B8%AAIMU%E6%A8%A1%E5%9D%97/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
   
   
 <script src="/js/shares.js"></script>
