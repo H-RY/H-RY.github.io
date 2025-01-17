@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2025-01-11T09:23:06.326Z</updated>
+  <updated>2025-01-17T12:46:16.796Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何让你需要的库尽可能小</title>
+    <link href="http://example.com/2025/01/17/%E5%A6%82%E4%BD%95%E8%AE%A9%E4%BD%A0%E9%9C%80%E8%A6%81%E7%9A%84%E5%BA%93%E5%B0%BD%E5%8F%AF%E8%83%BD%E5%B0%8F/"/>
+    <id>http://example.com/2025/01/17/%E5%A6%82%E4%BD%95%E8%AE%A9%E4%BD%A0%E9%9C%80%E8%A6%81%E7%9A%84%E5%BA%93%E5%B0%BD%E5%8F%AF%E8%83%BD%E5%B0%8F/</id>
+    <published>2025-01-17T12:05:50.000Z</published>
+    <updated>2025-01-17T12:46:16.796Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;极致的对库优化&quot;&gt;&lt;a href=&quot;#极致的对库优化&quot; class=&quot;headerlink&quot; title=&quot;极致的对库优化&quot;&gt;&lt;/a&gt;极致的对库优化&lt;/h3&gt;&lt;h4 id=&quot;嵌入式开发过程中，我们总是希望在保证需要的功能正常的情况下，库越小越好（成本低）&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>如何导入一个三方库到项目中</title>
@@ -363,27 +384,6 @@
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Linux下的目录结构</title>
-    <link href="http://example.com/2025/01/06/Linux%E4%B8%8B%E7%9A%84%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/"/>
-    <id>http://example.com/2025/01/06/Linux%E4%B8%8B%E7%9A%84%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/</id>
-    <published>2025-01-06T13:20:18.000Z</published>
-    <updated>2025-01-06T13:20:54.396Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;Linux下的目录结构&quot;&gt;&lt;a href=&quot;#Linux下的目录结构&quot; class=&quot;headerlink&quot; title=&quot;Linux下的目录结构&quot;&gt;&lt;/a&gt;Linux下的目录结构&lt;/h2&gt;&lt;h3 id=&quot;：根目录，包含所有内容&quot;&gt;&lt;a</summary>
-        
-      
     
     
     
