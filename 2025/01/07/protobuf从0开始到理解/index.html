@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="John Doe" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      protobuf从0开始到理解 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <link rel="stylesheet" href="font_4805225_mn0ja744ran/iconfont.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Huang</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          <a href="/friends/">Friends</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">protobuf从0开始到理解</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2025-03-25 09:07:19
+        </span>
+        
+      </div>
+      <div class="markdown-body">
+        <h3 id="Protobuf-概述"><a href="#Protobuf-概述" class="headerlink" title="Protobuf 概述"></a>Protobuf 概述</h3><p>protobuf 也叫 protocol buffer 是 google 的一种数据交换的格式，它独立于语言，独立于平台（什么编程语言，什么平台都可以用），由于它是一种二进制的格式，比使用xml、json进行数据交换快很多。可以用于分布式应用之间的数据通信，或者异构环境下的数据交换。</p>
+<p>大白话就是能自动生成各种各样编程语言的结构体和类，我定义了一个结构体和类（对proto来说是.proto），然后我需要传输这些数据，我就用protobuf提供的工具生成对应的代码直接用.</p>
+<h3 id="生成对应源码步骤"><a href="#生成对应源码步骤" class="headerlink" title="生成对应源码步骤"></a>生成对应源码步骤</h3><ol>
+<li>确定数据格式，数据可简单可复杂</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">person</span> &#123;</span><br><span class="line">	<span class="type">int</span> id;</span><br><span class="line">	<span class="type">int</span> height;</span><br><span class="line">	string name[<span class="number">5</span>];</span><br><span class="line">	<span class="type">bool</span> sex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">work</span> &#123;</span><br><span class="line">	software,</span><br><span class="line">	hardware,</span><br><span class="line">	test,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>创建一个新的文件，文件名任意，但是文件后缀为.proto</p>
+</li>
+<li><p>根据protobuf的语法，编辑.proto文件。</p>
+<p><strong>注意：</strong></p>
+<p><strong>所有的字段都必须定义在message或enum内部！！！</strong></p>
+<p><strong>在message中每个元素必须指定初始值（标签号），必须是一个正整数，且不能重复！！！</strong></p>
+<p><strong>在enum中每个元素必须指定初始值（标签号），必须是整数，且第一个字段必须是0，且不能重复！！！</strong></p>
+<p><strong>如果想要引入别的proto文件，使用 import “xxx.proto” ！！！</strong></p>
+</li>
+</ol>
+<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">syntax = <span class="string">&quot;proto3&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> hry;</span><br><span class="line"></span><br><span class="line"><span class="keyword">message </span><span class="title class_">person</span> &#123;</span><br><span class="line">	<span class="type">int32</span> id = <span class="number">12</span>;</span><br><span class="line">	<span class="type">int32</span> height = <span class="number">175</span>;</span><br><span class="line">	<span class="keyword">repeated</span> <span class="type">bytes</span> name = <span class="number">10</span>;</span><br><span class="line">	<span class="type">bool</span> sex = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">enum </span><span class="title class_">work</span> &#123;</span><br><span class="line">	software = <span class="number">0</span>;</span><br><span class="line">	hardware = <span class="number">4</span>;</span><br><span class="line">	test = <span class="number">12</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="2">
+<li><p>使用protoc命令将.proto文件转化为相应的c++文件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protoc test.proto --cpp_out=./</span><br></pre></td></tr></table></figure>
+
+
+
+<ol>
+<li>源文件：xxx.pb.cc —&gt; xxx对应的名字和.proto文件名相同</li>
+<li>头文件：xxx.pb.h —&gt; xxx对应的名字和.proto文件名相同</li>
+</ol>
+<p>注意：需要protobuf的头文件和库才能用这些生成的文件哦！</p>
+</li>
+<li><p>需要将生成的c++文件添加到项目中，通过文件中提供的类API实现数据的序列化&#x2F;反序列化</p>
+</li>
+</ol>
+<h3 id="序列化和反序列化"><a href="#序列化和反序列化" class="headerlink" title="序列化和反序列化"></a>序列化和反序列化</h3><h4 id="通过protoc生成的文件中有一个头文件，其中有个类名和message关键字后定义的名字相同，-proto文件中message中成员就是生成的类的私有成员"><a href="#通过protoc生成的文件中有一个头文件，其中有个类名和message关键字后定义的名字相同，-proto文件中message中成员就是生成的类的私有成员" class="headerlink" title="通过protoc生成的文件中有一个头文件，其中有个类名和message关键字后定义的名字相同，.proto文件中message中成员就是生成的类的私有成员"></a>通过protoc生成的文件中有一个头文件，其中有个类名和message关键字后定义的名字相同，.proto文件中message中成员就是生成的类的私有成员</h4><h4 id="如何访问生成类的私有成员？"><a href="#如何访问生成类的私有成员？" class="headerlink" title="如何访问生成类的私有成员？"></a>如何访问生成类的私有成员？</h4><p>可以调用生成的类提供的公共成员函数：</p>
+<ul>
+<li>初始化：clear_变量（）</li>
+<li>get：变量（）</li>
+<li>set：set_变量（）</li>
+<li>拿到变量地址：mutable_变量（）</li>
+<li>数组变量<ul>
+<li>元素个数：变量_size（）</li>
+<li>新增元素：add_变量（）</li>
+</ul>
+</li>
+</ul>
+<h4 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h4><h5 id="将需要传输的数据转化成二进制格式的过程。在计算机科学中，序列化通常用于将内存中的对象持久化存储到磁盘上，或者在分布式系统中进行数据传输和通信。"><a href="#将需要传输的数据转化成二进制格式的过程。在计算机科学中，序列化通常用于将内存中的对象持久化存储到磁盘上，或者在分布式系统中进行数据传输和通信。" class="headerlink" title="将需要传输的数据转化成二进制格式的过程。在计算机科学中，序列化通常用于将内存中的对象持久化存储到磁盘上，或者在分布式系统中进行数据传输和通信。"></a>将需要传输的数据转化成二进制格式的过程。在计算机科学中，序列化通常用于将内存中的对象持久化存储到磁盘上，或者在分布式系统中进行数据传输和通信。</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// --- 将序列化的数据 数据保存到内存中</span></span><br><span class="line"><span class="comment">// 将类对象中的数据序列化为字符串, c++ 风格的字符串, 参数是一个传出参数</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">SerializeToString</span><span class="params">(std::string* output)</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="comment">// 将类对象中的数据序列化为字符串, c 风格的字符串, 参数 data 是一个传出参数</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">SerializeToArray</span><span class="params">(<span class="type">void</span>* data, <span class="type">int</span> size)</span> <span class="type">const</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ------ 写磁盘文件, 只需要调用这个函数, 数据自动被写入到磁盘文件中</span></span><br><span class="line"><span class="comment">// -- 需要提供流对象/文件描述符关联一个磁盘文件</span></span><br><span class="line"><span class="comment">// 将数据序列化写入到磁盘文件中, c++ 风格</span></span><br><span class="line"><span class="comment">// ostream 子类 ofstream -&gt; 写文件</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">SerializeToOstream</span><span class="params">(std::ostream* output)</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="comment">// 将数据序列化写入到磁盘文件中, c 风格</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">SerializeToFileDescriptor</span><span class="params">(<span class="type">int</span> file_descriptor)</span> <span class="type">const</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h4><h5 id="反序列化是将序列化后的二进制数据转化成我们需要的原本的数据的过程。"><a href="#反序列化是将序列化后的二进制数据转化成我们需要的原本的数据的过程。" class="headerlink" title="反序列化是将序列化后的二进制数据转化成我们需要的原本的数据的过程。"></a>反序列化是将序列化后的二进制数据转化成我们需要的原本的数据的过程。</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">ParseFromString</span><span class="params">(<span class="type">const</span> std::string&amp; data)</span> </span>;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">ParseFromArray</span><span class="params">(<span class="type">const</span> <span class="type">void</span>* data, <span class="type">int</span> size)</span></span>;</span><br><span class="line"><span class="comment">// istream -&gt; 子类 ifstream -&gt; 读操作</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// w-&gt;写 o: ofstream , r-&gt;读 i: ifstream</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">ParseFromIstream</span><span class="params">(std::istream* input)</span></span>;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">ParseFromFileDescriptor</span><span class="params">(<span class="type">int</span> file_descriptor)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="如何编译一个protobuf库"><a href="#如何编译一个protobuf库" class="headerlink" title="如何编译一个protobuf库"></a>如何编译一个protobuf库</h3><h4 id="每一个三方库要编译，当然要先把他拉取下来，找到项目的网址，clone下来会发现他项目的根目录没有CMakeList-txt，但是有MakeFile，然后他还有一个cmake文件夹里面放的是CMakeList-txt。猜测是以前用MakeFile直接编译，后来引入了cmake但是也没有删除MakeFile的编译方式，开始对着文档操作"><a href="#每一个三方库要编译，当然要先把他拉取下来，找到项目的网址，clone下来会发现他项目的根目录没有CMakeList-txt，但是有MakeFile，然后他还有一个cmake文件夹里面放的是CMakeList-txt。猜测是以前用MakeFile直接编译，后来引入了cmake但是也没有删除MakeFile的编译方式，开始对着文档操作" class="headerlink" title="每一个三方库要编译，当然要先把他拉取下来，找到项目的网址，clone下来会发现他项目的根目录没有CMakeList.txt，但是有MakeFile，然后他还有一个cmake文件夹里面放的是CMakeList.txt。猜测是以前用MakeFile直接编译，后来引入了cmake但是也没有删除MakeFile的编译方式，开始对着文档操作"></a>每一个三方库要编译，当然要先把他拉取下来，找到项目的网址，clone下来会发现他项目的根目录没有CMakeList.txt，但是有MakeFile，然后他还有一个cmake文件夹里面放的是CMakeList.txt。猜测是以前用MakeFile直接编译，后来引入了cmake但是也没有删除MakeFile的编译方式，开始对着文档操作</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/protocolbuffers/protobuf.git #网址不一定是对的</span><br><span class="line">cd protobuf</span><br><span class="line">git submodule update --init --recursive</span><br><span class="line">sudo apt-get install autoconf automake libtool curl make g++ unzip</span><br></pre></td></tr></table></figure>
+
+<h5 id="1-执行-autogen-sh"><a href="#1-执行-autogen-sh" class="headerlink" title="1. 执行.&#x2F;autogen.sh"></a>1. 执行.&#x2F;autogen.sh</h5><p><code>./autogen.sh</code> 是一个脚本文件，通常用于在使用 GNU 构建系统（如 <code>autoconf</code>、<code>automake</code> 等）开发的项目中，自动生成构建所需的配置文件和其他文件。</p>
+<p><strong>为什么执行 <code>./autogen.sh</code></strong></p>
+<p><code>autogen.sh</code> 脚本通常会执行以下步骤：</p>
+<ul>
+<li><strong>检查依赖</strong>：确保系统上安装了构建该项目所需的工具和库。</li>
+<li><strong>生成 <code>configure</code> 脚本</strong>：<code>autogen.sh</code> 通常会调用 <code>autoconf</code>，生成一个 <code>configure</code> 脚本。<code>configure</code> 脚本用于检查当前系统环境，并生成适合该系统的 Makefile 等构建文件。</li>
+<li><strong>生成 <code>Makefile.in</code> 文件</strong>：<code>autogen.sh</code> 还可能调用 <code>automake</code>，以确保 <code>Makefile.in</code> 文件是最新的。</li>
+<li><strong>其他自动化步骤</strong>：根据项目配置，还可能会涉及其他自动化任务，如更新 <code>aclocal.m4</code> 等文件。</li>
+</ul>
+<h5 id="2-执行-configure"><a href="#2-执行-configure" class="headerlink" title="2. 执行.&#x2F;configure"></a>2. 执行.&#x2F;configure</h5><p><code>./configure</code> 是一个用于准备构建项目的脚本，通常在使用 <strong>GNU 构建系统</strong>（如 <code>autoconf</code>、<code>automake</code> 等）开发的项目中，在执行 <code>./autogen.sh</code> 或从源码获取之后，需要执行它来为项目配置合适的编译环境和构建参数。即生成MakeFile文件</p>
+<p><code>./configure</code> 脚本主要用于：</p>
+<ul>
+<li><strong>检查编译环境</strong>：它会检查你的系统环境，确认是否安装了项目编译所需的依赖库和工具。比如检查是否有 <code>gcc</code>（GNU 编译器）、<code>make</code> 工具、其他库的存在。</li>
+<li><strong>自动配置编译选项</strong>：根据系统的具体情况（操作系统、硬件架构、已安装的软件包等），<code>./configure</code> 会生成适合该系统的 <code>Makefile</code> 文件（编译规则文件）。<code>Makefile</code> 文件用于指导 <code>make</code> 工具如何编译和安装程序。</li>
+<li><strong>为项目定制配置</strong>：你可以传递不同的选项给 <code>./configure</code>，例如指定安装目录、启用或禁用某些功能等。这样可以根据你的需求来定制编译过程。</li>
+</ul>
+<h5 id="3-make或进入cmake文件夹通过cmake生成MakeFile"><a href="#3-make或进入cmake文件夹通过cmake生成MakeFile" class="headerlink" title="3. make或进入cmake文件夹通过cmake生成MakeFile"></a>3. make或进入cmake文件夹通过cmake生成MakeFile</h5><p>protobuf有两种编译方式，一种是直接进行make，另一种是进入cmake文件夹后使用cmake构建。</p>
+<p><strong>如果使用make</strong></p>
+<p><code>make</code> 是一个自动化构建工具，用于根据 <code>Makefile</code> 中的规则来编译和构建程序。它通常是在执行了 <code>./configure</code> 后使用的，<code>./configure</code> 会生成一个 <code>Makefile</code>，然后你使用 <code>make</code> 来实际执行构建操作。</p>
+<p>此处由于我们需要的库需要通过交叉编译生成，故需要更改MakeFile文件中，指定工具链，或更改.&#x2F;configure中让生成的MakeFile就是已经指定好工具链的，但是此处不生效，故使用cmake构建。</p>
+<p><code>Makefile</code> 中定义了规则，告诉 <code>make</code> 如何构建文件。一个典型的 <code>Makefile</code> 结构包括：</p>
+<ul>
+<li><strong>目标（Target）</strong>：要生成的文件，如可执行文件、库文件等。</li>
+<li><strong>依赖（Dependency）</strong>：目标所依赖的源文件或中间文件。</li>
+<li><strong>命令（Command）</strong>：用于生成目标的命令，通常是编译或链接命令。</li>
+</ul>
+<p><strong>如果使用cmake</strong></p>
+<p>指定工具链后执行对应命令</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake -DCMAKE_TOOLCHAIN_FILE=../toolchain/R328.cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=<span class="keyword">ON</span> -DCMAKE_CXX_FLAGS=<span class="string">&quot;-O3 -g0 -s&quot;</span> -DCMAKE_C_FLAGS=<span class="string">&quot;-O3 -g0 -s&quot;</span> ..</span><br></pre></td></tr></table></figure>
+
+<p>注意工具链需要放在对应路径，如此处工具链的cmake放在..&#x2F;toolchain&#x2F;中</p>
+<h5 id="4-make-check"><a href="#4-make-check" class="headerlink" title="4. make check"></a>4. make check</h5><p>在构建之后验证程序是否按预期工作，<code>make</code> 会根据 <code>Makefile</code> 中的定义，执行相应的测试命令或脚本。通过自动化测试，<code>make check</code> 可以帮助确保代码质量，防止程序在后续版本中出现回归问题。执行 <code>make check</code> 后，你可以查看测试结果，根据失败的测试信息进一步修复代码或环境配置。</p>
+<h5 id="5-make-install"><a href="#5-make-install" class="headerlink" title="5. make install"></a>5. make install</h5><p><code>make install</code> 是一个用来将已经构建好的程序安装到系统中指定位置的命令。它通常是构建和安装过程中的最后一步，执行该命令后，程序会被复制到系统的适当目录，如可执行文件、库文件、文档等。通常需要 <code>sudo**</code>**</p>
+<p><strong>什么情况下执行make install</strong></p>
+<p>问题：为什么我编译好了protobuf，还要make install？我为何不直接在项目内部用已经编译好的呢？</p>
+<p>解答：对于一些程序和依赖库，我们make install是为了给别的程序用，因为make install会把可执行文件放到bin文件夹下，库文件放到lib下，总之都是环境变量中，这样别的程序用的时候，直接自己在环境变量里找就好，比如此处的protoc命令，如果不执行make install，你只能手动设置环境变量，如果没加上protoc依赖的库，还可能出错，但是make install后，直接使用该命令就可以了。</p>
+<p>综上，protobuf作为数据格式的精髓就全部说完了，类比现实世界就是，各式各样的编程语言，最终到cpu中都是通过二进制来运算，这也是protobuf能实现的最重要的条件。</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2025/01/07/mqtt%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%88%B0%E7%90%86%E8%A7%A3/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2025-03-25 09:07:19
+            </span>
+            
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2025/01/07/hexo+github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Protobuf-%E6%A6%82%E8%BF%B0"><span class="toc-text">Protobuf 概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E5%AF%B9%E5%BA%94%E6%BA%90%E7%A0%81%E6%AD%A5%E9%AA%A4"><span class="toc-text">生成对应源码步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-text">序列化和反序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%9A%E8%BF%87protoc%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%AD%E6%9C%89%E4%B8%80%E4%B8%AA%E5%A4%B4%E6%96%87%E4%BB%B6%EF%BC%8C%E5%85%B6%E4%B8%AD%E6%9C%89%E4%B8%AA%E7%B1%BB%E5%90%8D%E5%92%8Cmessage%E5%85%B3%E9%94%AE%E5%AD%97%E5%90%8E%E5%AE%9A%E4%B9%89%E7%9A%84%E5%90%8D%E5%AD%97%E7%9B%B8%E5%90%8C%EF%BC%8C-proto%E6%96%87%E4%BB%B6%E4%B8%ADmessage%E4%B8%AD%E6%88%90%E5%91%98%E5%B0%B1%E6%98%AF%E7%94%9F%E6%88%90%E7%9A%84%E7%B1%BB%E7%9A%84%E7%A7%81%E6%9C%89%E6%88%90%E5%91%98"><span class="toc-text">通过protoc生成的文件中有一个头文件，其中有个类名和message关键字后定义的名字相同，.proto文件中message中成员就是生成的类的私有成员</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%AE%BF%E9%97%AE%E7%94%9F%E6%88%90%E7%B1%BB%E7%9A%84%E7%A7%81%E6%9C%89%E6%88%90%E5%91%98%EF%BC%9F"><span class="toc-text">如何访问生成类的私有成员？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-text">序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B0%86%E9%9C%80%E8%A6%81%E4%BC%A0%E8%BE%93%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BD%AC%E5%8C%96%E6%88%90%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BF%87%E7%A8%8B%E3%80%82%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%AD%EF%BC%8C%E5%BA%8F%E5%88%97%E5%8C%96%E9%80%9A%E5%B8%B8%E7%94%A8%E4%BA%8E%E5%B0%86%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8%E5%88%B0%E7%A3%81%E7%9B%98%E4%B8%8A%EF%BC%8C%E6%88%96%E8%80%85%E5%9C%A8%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%B8%AD%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%92%8C%E9%80%9A%E4%BF%A1%E3%80%82"><span class="toc-text">将需要传输的数据转化成二进制格式的过程。在计算机科学中，序列化通常用于将内存中的对象持久化存储到磁盘上，或者在分布式系统中进行数据传输和通信。</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-text">反序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%98%AF%E5%B0%86%E5%BA%8F%E5%88%97%E5%8C%96%E5%90%8E%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%95%B0%E6%8D%AE%E8%BD%AC%E5%8C%96%E6%88%90%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81%E7%9A%84%E5%8E%9F%E6%9C%AC%E7%9A%84%E6%95%B0%E6%8D%AE%E7%9A%84%E8%BF%87%E7%A8%8B%E3%80%82"><span class="toc-text">反序列化是将序列化后的二进制数据转化成我们需要的原本的数据的过程。</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%BC%96%E8%AF%91%E4%B8%80%E4%B8%AAprotobuf%E5%BA%93"><span class="toc-text">如何编译一个protobuf库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8F%E4%B8%80%E4%B8%AA%E4%B8%89%E6%96%B9%E5%BA%93%E8%A6%81%E7%BC%96%E8%AF%91%EF%BC%8C%E5%BD%93%E7%84%B6%E8%A6%81%E5%85%88%E6%8A%8A%E4%BB%96%E6%8B%89%E5%8F%96%E4%B8%8B%E6%9D%A5%EF%BC%8C%E6%89%BE%E5%88%B0%E9%A1%B9%E7%9B%AE%E7%9A%84%E7%BD%91%E5%9D%80%EF%BC%8Cclone%E4%B8%8B%E6%9D%A5%E4%BC%9A%E5%8F%91%E7%8E%B0%E4%BB%96%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%A0%B9%E7%9B%AE%E5%BD%95%E6%B2%A1%E6%9C%89CMakeList-txt%EF%BC%8C%E4%BD%86%E6%98%AF%E6%9C%89MakeFile%EF%BC%8C%E7%84%B6%E5%90%8E%E4%BB%96%E8%BF%98%E6%9C%89%E4%B8%80%E4%B8%AAcmake%E6%96%87%E4%BB%B6%E5%A4%B9%E9%87%8C%E9%9D%A2%E6%94%BE%E7%9A%84%E6%98%AFCMakeList-txt%E3%80%82%E7%8C%9C%E6%B5%8B%E6%98%AF%E4%BB%A5%E5%89%8D%E7%94%A8MakeFile%E7%9B%B4%E6%8E%A5%E7%BC%96%E8%AF%91%EF%BC%8C%E5%90%8E%E6%9D%A5%E5%BC%95%E5%85%A5%E4%BA%86cmake%E4%BD%86%E6%98%AF%E4%B9%9F%E6%B2%A1%E6%9C%89%E5%88%A0%E9%99%A4MakeFile%E7%9A%84%E7%BC%96%E8%AF%91%E6%96%B9%E5%BC%8F%EF%BC%8C%E5%BC%80%E5%A7%8B%E5%AF%B9%E7%9D%80%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C"><span class="toc-text">每一个三方库要编译，当然要先把他拉取下来，找到项目的网址，clone下来会发现他项目的根目录没有CMakeList.txt，但是有MakeFile，然后他还有一个cmake文件夹里面放的是CMakeList.txt。猜测是以前用MakeFile直接编译，后来引入了cmake但是也没有删除MakeFile的编译方式，开始对着文档操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%89%A7%E8%A1%8C-autogen-sh"><span class="toc-text">1. 执行.&#x2F;autogen.sh</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E6%89%A7%E8%A1%8C-configure"><span class="toc-text">2. 执行.&#x2F;configure</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-make%E6%88%96%E8%BF%9B%E5%85%A5cmake%E6%96%87%E4%BB%B6%E5%A4%B9%E9%80%9A%E8%BF%87cmake%E7%94%9F%E6%88%90MakeFile"><span class="toc-text">3. make或进入cmake文件夹通过cmake生成MakeFile</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-make-check"><span class="toc-text">4. make check</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-make-install"><span class="toc-text">5. make install</span></a></li></ol></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+  
+    <script async type="text/javascript" src="/plugins/valine.min.js" onload="loadValineSuc(this)"></script>
+  
+
+  <div id="vcomments"></div>
+
+  <script>
+    function loadValineSuc() {
+      new Valine({
+        el: '#vcomments',
+        appId: 'nyRspGwGgVM9RJD3ZeUAMIaD-gzGzoHsz',
+        appKey: 'H9K1pHBag6iqt2dBMWcnxXQ0',
+        placeholder: 'Welcome!',
+        avatar: 'retro',
+        lang: 'en'
+      })
+    }
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/H-RY">
+                <i class="my-iconfont my-icon-github"></i>
+              </a>
+              
+        </li>
+        
+        <li>
+          
+              <a title="wechat" href="/images/wechat.png">
+                <i class="my-iconfont my-icon-wechat-fill"></i>
+              </a>
+              
+        </li>
+        
+        <li>
+          
+              <a title="qq" href="/images/qq.png">
+                <i class="my-iconfont my-icon-qq-line"></i>
+              </a>
+              
+        </li>
+        
+        <li>
+          
+              <a title="bilibili" target="_blank" rel="noopener" href="https://space.bilibili.com/457421988?spm_id_from=333.1007.0.0">
+                <i class="my-iconfont my-icon-bilibili-fill"></i>
+              </a>
+              
+        </li>
+        
+        <li>
+          
+              <a title="zhihu" target="_blank" rel="noopener" href="https://www.zhihu.com/people/ying-ying-ying-68-32">
+                <i class="my-iconfont my-icon-zhihu"></i>
+              </a>
+              
+        </li>
+        
+        <li>
+          
+              <a title="steam" target="_blank" rel="noopener" href="https://steamcommunity.com/profiles/76561198925692261/">
+                <i class="my-iconfont my-icon-steam"></i>
+              </a>
+              
+        </li>
+        
+        <li>
+          
+              <a title="heybox" href="/images/heybox.png">
+                <i class="my-iconfont my-icon-heybox"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2025 HRY</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + protobuf%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%88%B0%E7%90%86%E8%A7%A3 + '&url=' + http%3A%2F%2Fexample.com%2F2025%2F01%2F07%2Fprotobuf%25E4%25BB%258E0%25E5%25BC%2580%25E5%25A7%258B%25E5%2588%25B0%25E7%2590%2586%25E8%25A7%25A3%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2025/01/07/protobuf%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%88%B0%E7%90%86%E8%A7%A3/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  </body>
+</html>

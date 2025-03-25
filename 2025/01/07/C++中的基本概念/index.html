@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="John Doe" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      C++中的基本概念 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <link rel="stylesheet" href="font_4805225_mn0ja744ran/iconfont.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Huang</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          <a href="/friends/">Friends</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">C++中的基本概念</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2025-03-25 09:07:19
+        </span>
+        
+      </div>
+      <div class="markdown-body">
+        <h2 id="c-中的对比概念"><a href="#c-中的对比概念" class="headerlink" title="c++中的对比概念"></a>c++中的对比概念</h2><h3 id="指针和引用"><a href="#指针和引用" class="headerlink" title="指针和引用"></a>指针和引用</h3><h4 id="为什么有了指针还需要引用"><a href="#为什么有了指针还需要引用" class="headerlink" title="为什么有了指针还需要引用"></a>为什么有了指针还需要引用</h4><ol>
+<li>语法的便利和可读</li>
+<li>对函数重载的支持和语义的准确性</li>
+<li>某些操作的语义要求</li>
+</ol>
+<h3 id="静态多态和动态多态"><a href="#静态多态和动态多态" class="headerlink" title="静态多态和动态多态"></a>静态多态和动态多态</h3><h4 id="静态多态（编译时多态）"><a href="#静态多态（编译时多态）" class="headerlink" title="静态多态（编译时多态）"></a>静态多态（编译时多态）</h4><ol>
+<li>函数重载，同名函数，参数列表不同</li>
+<li>模板（泛型程序机制）</li>
+</ol>
+<h4 id="动态多态（运行时多态）"><a href="#动态多态（运行时多态）" class="headerlink" title="动态多态（运行时多态）"></a>动态多态（运行时多态）</h4><ol>
+<li>虚函数和重写</li>
+<li>纯虚函数和抽象类</li>
+</ol>
+<h3 id="指针的一些用法"><a href="#指针的一些用法" class="headerlink" title="指针的一些用法"></a>指针的一些用法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *p = <span class="number">0x0</span>;</span><br><span class="line">p++;</span><br></pre></td></tr></table></figure>
+
+<p>0x意味着十六进制数，等于十进制的0（c++中0为NULL）</p>
+<p>即定义p为一个空指针</p>
+<p>而p++，指针自增时，会增加指针指向的地址，具体多少取决于指针指向的类型（具体大小依赖平台）此处int为4个字节，另此时内存地址仍无效</p>
+<p>long在32位系统上占4个字节，而在64位系统上占8个字节</p>
+<p>指针类型在32位系统上占4个字节，因为系统地址总线32位，而在64位系统上占8个字节，因为系统地址总线64位</p>
+<h3 id="类的默认访问权限是private，结构体的默认访问权限是public"><a href="#类的默认访问权限是private，结构体的默认访问权限是public" class="headerlink" title="类的默认访问权限是private，结构体的默认访问权限是public"></a>类的默认访问权限是private，结构体的默认访问权限是public</h3><h3 id="const常量具有类型，编译器可以进行安全检查，而define宏定义没有数据类型，只是简单的字符串替换，编译器不能进行安全检查"><a href="#const常量具有类型，编译器可以进行安全检查，而define宏定义没有数据类型，只是简单的字符串替换，编译器不能进行安全检查" class="headerlink" title="const常量具有类型，编译器可以进行安全检查，而define宏定义没有数据类型，只是简单的字符串替换，编译器不能进行安全检查"></a>const常量具有类型，编译器可以进行安全检查，而define宏定义没有数据类型，只是简单的字符串替换，编译器不能进行安全检查</h3><h3 id="面向对象和面向过程"><a href="#面向对象和面向过程" class="headerlink" title="面向对象和面向过程"></a>面向对象和面向过程</h3><p><strong>面向过程：</strong>分析解决问题的步骤</p>
+<p>下五子棋{</p>
+<p>开始游戏（）；</p>
+<p>黑子先走（）；</p>
+<p>绘制画面（）；</p>
+<p>判断输赢（）；</p>
+<p>轮到白子（）；</p>
+<p>绘制画面（）；</p>
+<p>判断输赢（）；</p>
+<p>返回到 黑子先走（）；</p>
+<p>输出最后结果；</p>
+<p>}</p>
+<p><strong>面向对象：</strong>一切都是对象</p>
+<p>（1）黑白双方，这两方的行为是一样的。</p>
+<p>（2）棋盘系统，负责绘制画面</p>
+<p>（3）规则系统，负责判定犯规、输赢等。</p>
+<p>（4）第一类对象（黑白双方）负责接受用户输入，<br>并告知第二类对象（棋盘系统）棋子布局的变化，棋盘系统接收到了棋子的变化，<br>并负责在屏幕上面显示出这种变化，同时利用第三类对象（规则系统）来对棋局进行判定。</p>
+<h3 id="赋值方法"><a href="#赋值方法" class="headerlink" title="赋值方法"></a>赋值方法</h3><p>string赋给char数组：strcpy(char[], string.str());</p>
+<h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><p>动态库加载的时候会首先执行init初始化过程，static静态变量就是在这个过程中创建，在初始化完成之后，才把控制权交给main函数。 当卸载动态库的时候，static静态变量会在这个过程中卸载。 因此静态库在程序执行之前就创建了。</p>
+<h3 id="extern"><a href="#extern" class="headerlink" title="extern"></a>extern</h3><p>在 C++ 中，extern 是一个关键字，用于声明外部变量和函数。它告诉编译器某个变量或函数是在其他源文件中定义的，并且在当前源文件中需要引用。</p>
+<h4 id="作用："><a href="#作用：" class="headerlink" title="作用："></a>作用：</h4><p><strong>外部变量声明：</strong>如果你想在一个源文件中定义一个全局的变量，并且希望在其他源文件中也能够访问和使用该变量，那么你需要在其他源文件中使用 extern 关键字进行声明。这样，编译器就知道该变量是在其他地方定义的，而不是当前源文件中定义的。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// File1.cpp</span></span><br><span class="line"><span class="type">int</span> globalVar = <span class="number">42</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// File2.cpp</span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> globalVar;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 可以在此处访问和使用 globalVar</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>外部函数声明：</strong>当你在一个源文件中定义了一个函数，并且希望在其他源文件中使用该函数时，你需要在其他源文件中使用 extern 关键字进行声明。这样，编译器就知道该函数是在其他地方定义的，并且可以正确地链接到该函数的定义。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// File1.cpp</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">someFunction</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 函数定义</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// File2.cpp</span></span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="type">void</span> <span class="title">someFunction</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">someFunction</span>();  <span class="comment">// 调用定义在 File1.cpp 中的函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>需要注意的是，extern 声明仅仅是告诉编译器该变量或函数是在其他地方定义的，而不是实际的定义。因此，你不能在 extern 声明语句中初始化变量，而只能在定义的地方进行初始化。同时，如果你声明了一个 extern 变量或函数，但却没有在其他源文件中进行定义，那么在链接时会引发链接错误。</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2025/01/07/%E5%A6%82%E4%BD%95%E5%AF%BC%E5%85%A5%E4%B8%80%E4%B8%AAIMU%E6%A8%A1%E5%9D%97/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2025-03-25 09:07:19
+            </span>
+            
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2025/01/07/Linux%E7%9A%84%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#c-%E4%B8%AD%E7%9A%84%E5%AF%B9%E6%AF%94%E6%A6%82%E5%BF%B5"><span class="toc-text">c++中的对比概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E5%92%8C%E5%BC%95%E7%94%A8"><span class="toc-text">指针和引用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89%E4%BA%86%E6%8C%87%E9%92%88%E8%BF%98%E9%9C%80%E8%A6%81%E5%BC%95%E7%94%A8"><span class="toc-text">为什么有了指针还需要引用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%A4%9A%E6%80%81%E5%92%8C%E5%8A%A8%E6%80%81%E5%A4%9A%E6%80%81"><span class="toc-text">静态多态和动态多态</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%A4%9A%E6%80%81%EF%BC%88%E7%BC%96%E8%AF%91%E6%97%B6%E5%A4%9A%E6%80%81%EF%BC%89"><span class="toc-text">静态多态（编译时多态）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%A4%9A%E6%80%81%EF%BC%88%E8%BF%90%E8%A1%8C%E6%97%B6%E5%A4%9A%E6%80%81%EF%BC%89"><span class="toc-text">动态多态（运行时多态）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E7%9A%84%E4%B8%80%E4%BA%9B%E7%94%A8%E6%B3%95"><span class="toc-text">指针的一些用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E9%BB%98%E8%AE%A4%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E6%98%AFprivate%EF%BC%8C%E7%BB%93%E6%9E%84%E4%BD%93%E7%9A%84%E9%BB%98%E8%AE%A4%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E6%98%AFpublic"><span class="toc-text">类的默认访问权限是private，结构体的默认访问权限是public</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#const%E5%B8%B8%E9%87%8F%E5%85%B7%E6%9C%89%E7%B1%BB%E5%9E%8B%EF%BC%8C%E7%BC%96%E8%AF%91%E5%99%A8%E5%8F%AF%E4%BB%A5%E8%BF%9B%E8%A1%8C%E5%AE%89%E5%85%A8%E6%A3%80%E6%9F%A5%EF%BC%8C%E8%80%8Cdefine%E5%AE%8F%E5%AE%9A%E4%B9%89%E6%B2%A1%E6%9C%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%8C%E5%8F%AA%E6%98%AF%E7%AE%80%E5%8D%95%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9B%BF%E6%8D%A2%EF%BC%8C%E7%BC%96%E8%AF%91%E5%99%A8%E4%B8%8D%E8%83%BD%E8%BF%9B%E8%A1%8C%E5%AE%89%E5%85%A8%E6%A3%80%E6%9F%A5"><span class="toc-text">const常量具有类型，编译器可以进行安全检查，而define宏定义没有数据类型，只是简单的字符串替换，编译器不能进行安全检查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%92%8C%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B"><span class="toc-text">面向对象和面向过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%8B%E5%80%BC%E6%96%B9%E6%B3%95"><span class="toc-text">赋值方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#static"><span class="toc-text">static</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extern"><span class="toc-text">extern</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8%EF%BC%9A"><span class="toc-text">作用：</span></a></li></ol></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+  
+    <script async type="text/javascript" src="/plugins/valine.min.js" onload="loadValineSuc(this)"></script>
+  
+
+  <div id="vcomments"></div>
+
+  <script>
+    function loadValineSuc() {
+      new Valine({
+        el: '#vcomments',
+        appId: 'nyRspGwGgVM9RJD3ZeUAMIaD-gzGzoHsz',
+        appKey: 'H9K1pHBag6iqt2dBMWcnxXQ0',
+        placeholder: 'Welcome!',
+        avatar: 'retro',
+        lang: 'en'
+      })
+    }
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/H-RY">
+                <i class="my-iconfont my-icon-github"></i>
+              </a>
+              
+        </li>
+        
+        <li>
+          
+              <a title="wechat" href="/images/wechat.png">
+                <i class="my-iconfont my-icon-wechat-fill"></i>
+              </a>
+              
+        </li>
+        
+        <li>
+          
+              <a title="qq" href="/images/qq.png">
+                <i class="my-iconfont my-icon-qq-line"></i>
+              </a>
+              
+        </li>
+        
+        <li>
+          
+              <a title="bilibili" target="_blank" rel="noopener" href="https://space.bilibili.com/457421988?spm_id_from=333.1007.0.0">
+                <i class="my-iconfont my-icon-bilibili-fill"></i>
+              </a>
+              
+        </li>
+        
+        <li>
+          
+              <a title="zhihu" target="_blank" rel="noopener" href="https://www.zhihu.com/people/ying-ying-ying-68-32">
+                <i class="my-iconfont my-icon-zhihu"></i>
+              </a>
+              
+        </li>
+        
+        <li>
+          
+              <a title="steam" target="_blank" rel="noopener" href="https://steamcommunity.com/profiles/76561198925692261/">
+                <i class="my-iconfont my-icon-steam"></i>
+              </a>
+              
+        </li>
+        
+        <li>
+          
+              <a title="heybox" href="/images/heybox.png">
+                <i class="my-iconfont my-icon-heybox"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2025 HRY</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + C%2B%2B%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5 + '&url=' + http%3A%2F%2Fexample.com%2F2025%2F01%2F07%2FC%2B%2B%25E4%25B8%25AD%25E7%259A%2584%25E5%259F%25BA%25E6%259C%25AC%25E6%25A6%2582%25E5%25BF%25B5%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2025/01/07/C++%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  </body>
+</html>

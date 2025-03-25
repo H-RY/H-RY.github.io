@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="John Doe" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      嵌入式专业名词 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <link rel="stylesheet" href="font_4805225_mn0ja744ran/iconfont.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Huang</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          <a href="/friends/">Friends</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">嵌入式专业名词</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2025-03-25 09:07:19
+        </span>
+        
+      </div>
+      <div class="markdown-body">
+        <h2 id="嵌入式专有名词"><a href="#嵌入式专有名词" class="headerlink" title="嵌入式专有名词"></a>嵌入式专有名词</h2><p>MCU常见接口：通用I&#x2F;O（即GPIO）、模数转换（A&#x2F;D）、数模转换（D&#x2F;A）、串行通信接口（UART）、串行外设接口（SPI、I2C、CAN、USB）、嵌入式以太网、LED、LCD等外，因应用处理器的场景通常与多媒体、PC互联等需要，因此其接口通常还包括USB、PCI、TU-R 656、TS、AC97、3D、2D、闪存、DDR、SD等。</p>
+<h4 id="嵌入式学习路线"><a href="#嵌入式学习路线" class="headerlink" title="嵌入式学习路线"></a>嵌入式学习路线</h4><p>首先把嵌入式系统软件与硬件基础打好，再根据实际应用需要，选择一种实时操作系统RTOS进行实践，初学者必须明确认识，RTOS是开发某些嵌入式产品的辅助工具，是手段，不是目的，况且一些小型，微型嵌入式产品并不需要RTOS。</p>
+<h3 id="GPIO"><a href="#GPIO" class="headerlink" title="GPIO"></a>GPIO</h3><p>采集外部器件信息或控制外部器件工作，每个GPIO口可用作其他外设的功能实现，可被配置成16种复用的功能，使用GPIO功能要配置对应寄存器，板子上每一根针都可以理解为GPIO</p>
+<p>通用输入／输出（General Purpose I&#x2F;O，GPIO）即基本的输入／输出，有时也称并行I&#x2F;O。作为通用输入引脚时，MCU内部程序可以读取该引脚，知道该引脚是“1”（高电平）或“0”（低电平），即开关量输入。</p>
+<p>对于GPIO口来说，高于某个电压，读出来只有高电平，低于则为低电平，如果想知道具体的电压值需要ADC，在某个IO口上如果用GPIO模式只能拿到0和1，但是ADC可以拿到电压连续变化的值。</p>
+<h3 id="UART"><a href="#UART" class="headerlink" title="UART"></a>UART</h3><p>必有TX，RX，GND（全双工）TX发，RX收</p>
+<h3 id="PWM"><a href="#PWM" class="headerlink" title="PWM"></a>PWM</h3><p>脉冲宽度调制器（Pulse Width Modulator，PWM）是一个D&#x2F;A转换器，可以产生一个高电平和低电平之间重复交替的输出信号——PWM信号。脉冲宽度调制，等效出所需要的波形，用数字信号达到模拟信号的效果，输出占空比来调节电压</p>
+<h3 id="ADC"><a href="#ADC" class="headerlink" title="ADC"></a>ADC</h3><p>模数转换（Analog to Digital Convert，ADC）的功能是将电压信号（模拟量）转换为对应的数字量。实际应用中，这个电压信号可能由温度、湿度、压力等实际物理量经过传感器和相应的变换电路转化而来。经过A&#x2F;D转换，MCU就可以处理这些物理量。而与之相反，数模转换（Digital to Analog Convert，DAC）的功能则是将数字量转换为电压信号（模拟量）。模数转换器，模拟信号转化为数字信号，主要用来采集电压</p>
+<h3 id="IIC"><a href="#IIC" class="headerlink" title="IIC"></a>IIC</h3><p>一种总线，支持设备间短距离通信（外设总线）（串行通信总线）解决多个设备都需要独立串口通讯。</p>
+<p>有SCL时钟，SDA数据</p>
+<h3 id="SPI"><a href="#SPI" class="headerlink" title="SPI"></a>SPI</h3><p>（全双工）（串行外设接口）主要用于MCU扩展外围芯片使用，这些芯片可以是具有SPI接口的A&#x2F;D转换，时钟芯片等，芯片之间的通讯，（一主多从）有CLK时钟，CS片选，MISO和MOSI 4个pin脚，特性是主输入从输出对应接（无需像UART交叉接）</p>
+<h3 id="MIPI"><a href="#MIPI" class="headerlink" title="MIPI"></a>MIPI</h3><p>移动产业处理器接口，目的是把手机内部的接口标准化，包含一整套协议和标准，比如包含显示设备用的DSI，摄像头用的CSI，RFIC用的DigRF，存储设备用的UFS</p>
+<h3 id="CSI"><a href="#CSI" class="headerlink" title="CSI"></a>CSI</h3><p>集成电路互联总线，是两线式串行总线，主要用于用户电路板内MCU与其外围电路的连接。主机处理器与摄像头，模块之间的高速串行接口，针对摄像头芯片进行接口设计，是MIPI联盟的子协议</p>
+<h3 id="RTOS"><a href="#RTOS" class="headerlink" title="RTOS"></a>RTOS</h3><p>实时操作系统，按排序运行，管理系统资源，并为开发应用程序提供一致的基础，有实时任务调度器，严格按优先级分配CPU时间</p>
+<h3 id="DSP"><a href="#DSP" class="headerlink" title="DSP"></a>DSP</h3><p>数字信号处理技术，以数字形式对信号进行采集，变换，滤波，估值，增强，压缩，识别等处理，以得到符合人们需要的信号的技术</p>
+<h3 id="CAN"><a href="#CAN" class="headerlink" title="CAN"></a>CAN</h3><p>控制器局域网，是一种全数字，全开放的现场总线控制网络，目前在汽车电子中应用最广。CAN总线可在多个节点之间，确保数据的实时传输和可靠性（串行通信协议）</p>
+<h3 id="IMU"><a href="#IMU" class="headerlink" title="IMU"></a>IMU</h3><p>惯性测量单元（电子设备）用于测量和报告物体的三个基本线性运动（加速度）和三个基本角运动（角速度）包含加速度计和陀螺仪（有时还有磁动计），原理为惯性定律</p>
+<h3 id="LIN"><a href="#LIN" class="headerlink" title="LIN"></a>LIN</h3><p>由于CAN太贵而发明，基于（UART&#x2F;SCI）低成本串行通讯协议，定位为低端通信，一般与上层CAN网络相连，CAN-LIN</p>
+<h3 id="ISP"><a href="#ISP" class="headerlink" title="ISP"></a>ISP</h3><p>一种单片机的烧录方式，在系统编程使用引导程序加上外围UART&#x2F;SPI等接口进行烧录</p>
+<h3 id="SDIO"><a href="#SDIO" class="headerlink" title="SDIO"></a>SDIO</h3><p>SD卡的接口，和USB类似</p>
+<h3 id="FPGA"><a href="#FPGA" class="headerlink" title="FPGA"></a>FPGA</h3><p>现场可编程逻辑门阵列，属于专用集成电路中的一种半定制电路，是可编程的逻辑阵列，就是一颗芯片，半定制的芯片，里面的电路可以通过硬件描述语言设计</p>
+<h3 id="中断触发方式"><a href="#中断触发方式" class="headerlink" title="中断触发方式"></a>中断触发方式</h3><ol>
+<li>上升沿：0 —&gt;1瞬间触发 （脉冲输入，按钮向下）</li>
+<li>下降沿：1—&gt;0                  （按钮释放，停止信号）</li>
+<li>双边沿：跳变触发             （计数输入，信号频率检测）</li>
+<li>高电平触发：保持高电平一直中断（设备就绪信号，状态监控）</li>
+<li>低电平触发：保持低电平中断        （设备忙状态，错误信号）</li>
+</ol>
+<h3 id="嵌入式寄存器类型"><a href="#嵌入式寄存器类型" class="headerlink" title="嵌入式寄存器类型"></a>嵌入式寄存器类型</h3><p>嵌入式中还常用到寄存器类型（Register）变量。例如，通常将内存变量（包括全局变量、静态变量、局部变量）的值存放在内存中，CPU访问内存变量要通过三总线（地址总线、数据总线、控制总线）进行，如果有一些变量使用频繁，则为存取变量的值要花不少时间。</p>
+<p>①只有局部变量和形式参数可以使用寄存器变量，其他变量（如全局变量、静态变量）不能使用register类型变量</p>
+<p>②CPU内部寄存器数目很少，不能定义任意多个寄存器变量</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2025/01/07/%E5%A6%82%E4%BD%95%E7%94%A8%E7%A4%BA%E6%B3%A2%E5%99%A8%E6%9F%A5%E8%AF%A2%E7%94%B5%E6%B5%81%E7%9A%84%E9%97%AE%E9%A2%98/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2025-03-25 09:07:19
+            </span>
+            
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2025/01/07/%E5%A6%82%E4%BD%95%E5%AF%BC%E5%85%A5%E4%B8%80%E4%B8%AAIMU%E6%A8%A1%E5%9D%97/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F%E4%B8%93%E6%9C%89%E5%90%8D%E8%AF%8D"><span class="toc-text">嵌入式专有名词</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF"><span class="toc-text">嵌入式学习路线</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GPIO"><span class="toc-text">GPIO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UART"><span class="toc-text">UART</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PWM"><span class="toc-text">PWM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ADC"><span class="toc-text">ADC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IIC"><span class="toc-text">IIC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SPI"><span class="toc-text">SPI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MIPI"><span class="toc-text">MIPI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSI"><span class="toc-text">CSI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTOS"><span class="toc-text">RTOS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DSP"><span class="toc-text">DSP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CAN"><span class="toc-text">CAN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IMU"><span class="toc-text">IMU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LIN"><span class="toc-text">LIN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ISP"><span class="toc-text">ISP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SDIO"><span class="toc-text">SDIO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FPGA"><span class="toc-text">FPGA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E8%A7%A6%E5%8F%91%E6%96%B9%E5%BC%8F"><span class="toc-text">中断触发方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AF%84%E5%AD%98%E5%99%A8%E7%B1%BB%E5%9E%8B"><span class="toc-text">嵌入式寄存器类型</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+  
+    <script async type="text/javascript" src="/plugins/valine.min.js" onload="loadValineSuc(this)"></script>
+  
+
+  <div id="vcomments"></div>
+
+  <script>
+    function loadValineSuc() {
+      new Valine({
+        el: '#vcomments',
+        appId: 'nyRspGwGgVM9RJD3ZeUAMIaD-gzGzoHsz',
+        appKey: 'H9K1pHBag6iqt2dBMWcnxXQ0',
+        placeholder: 'Welcome!',
+        avatar: 'retro',
+        lang: 'en'
+      })
+    }
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/H-RY">
+                <i class="my-iconfont my-icon-github"></i>
+              </a>
+              
+        </li>
+        
+        <li>
+          
+              <a title="wechat" href="/images/wechat.png">
+                <i class="my-iconfont my-icon-wechat-fill"></i>
+              </a>
+              
+        </li>
+        
+        <li>
+          
+              <a title="qq" href="/images/qq.png">
+                <i class="my-iconfont my-icon-qq-line"></i>
+              </a>
+              
+        </li>
+        
+        <li>
+          
+              <a title="bilibili" target="_blank" rel="noopener" href="https://space.bilibili.com/457421988?spm_id_from=333.1007.0.0">
+                <i class="my-iconfont my-icon-bilibili-fill"></i>
+              </a>
+              
+        </li>
+        
+        <li>
+          
+              <a title="zhihu" target="_blank" rel="noopener" href="https://www.zhihu.com/people/ying-ying-ying-68-32">
+                <i class="my-iconfont my-icon-zhihu"></i>
+              </a>
+              
+        </li>
+        
+        <li>
+          
+              <a title="steam" target="_blank" rel="noopener" href="https://steamcommunity.com/profiles/76561198925692261/">
+                <i class="my-iconfont my-icon-steam"></i>
+              </a>
+              
+        </li>
+        
+        <li>
+          
+              <a title="heybox" href="/images/heybox.png">
+                <i class="my-iconfont my-icon-heybox"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2025 HRY</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E5%B5%8C%E5%85%A5%E5%BC%8F%E4%B8%93%E4%B8%9A%E5%90%8D%E8%AF%8D + '&url=' + http%3A%2F%2Fexample.com%2F2025%2F01%2F07%2F%25E5%25B5%258C%25E5%2585%25A5%25E5%25BC%258F%25E4%25B8%2593%25E4%25B8%259A%25E5%2590%258D%25E8%25AF%258D%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2025/01/07/%E5%B5%8C%E5%85%A5%E5%BC%8F%E4%B8%93%E4%B8%9A%E5%90%8D%E8%AF%8D/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  </body>
+</html>
